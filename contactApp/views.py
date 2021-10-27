@@ -178,7 +178,6 @@ def serialize(obj):
                     d.update({k: settings.MEDIA_URL + obj.__dict__[k]})
     return d
 
-
 # Load Profile Data
 def profile_data(request):
     if 'email' in request.session:
@@ -252,7 +251,6 @@ def profile_image_upload(request):
     msg_system('success', 'Image Changed', 'Your profile photo uploaded successfully.')
 
     return redirect(profile_page)
-
 
 # password update
 def password_update(request):
