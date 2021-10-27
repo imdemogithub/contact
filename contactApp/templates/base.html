@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon.png' %}">
+    <title>Admin Press Admin Template - The Ultimate Bootstrap 4 Admin Template</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    {% if current_page not in style_pages %}
+    <!-- morris CSS -->
+    <link href="{% static 'assets/plugins/morrisjs/morris.css' %}" rel="stylesheet">
+    {% endif %}
+    <!-- Custom CSS -->
+    <link href="{% static 'assets/main/css/style.css' %}" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="{% static 'css/colors/blue.css' %}" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js' %}"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js' %}"></script>
+<![endif]-->
+
+        <style>
+            /*** CUSTOM FILE INPUT STYE ***/
+.wrap-custom-file {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin: 0 0.5rem 1rem;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.wrap-custom-file input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  overflow: hidden;
+  opacity: 0;
+}
+.wrap-custom-file div.actions {
+    background-color: #fff;
+    width: max-content;
+    height: max-content;
+    z-index: 111;
+    position: absolute;
+    bottom: -0.5em;
+    right: 0;
+    left: 0;
+    margin: auto;
+    padding: 0 6px;
+    border-radius: 50px;
+    border: solid 2px #06d;
+    box-shadow: 2px 2px 5px 0px rgb(0 0 0 / 80%);
+}
+
+.wrap-custom-file div.actions .icon {
+    position: relative;
+    color: #06d !important;
+    width: 24px;
+    cursor: pointer;
+    height: inherit;
+    margin: auto;
+    /* bottom: 4px; */
+    -webkit-transition: color 0.4s;
+  transition: color 0.4s;
+}
+.wrap-custom-file div.actions .icon::after {
+  /* display: none; */
+  content: '';
+  position: absolute;
+  width: 36px;
+    height: 25px;
+    left: -6px;
+    top: 1px;
+  bottom: 0;
+  margin: auto 0;
+  color: #06d;
+  z-index: -1;
+  border-radius: 50px;
+}
+.wrap-custom-file div.actions .icon.add-commit::after {
+  border-radius: 50px 0 0 50px;
+  left: -8px;
+}
+.wrap-custom-file div.actions .icon.cancel::after {
+  right: -8px;
+  border-radius: 0 50px 50px 0;
+}
+.wrap-custom-file div.actions .icon:not(.active) {
+  display: none;
+}
+.wrap-custom-file div.actions .icon:hover {
+  color: #fff !important;
+}
+.wrap-custom-file div.actions .icon:hover::after {
+  background-color: #06d;
+}
+
+.wrap-custom-file div.image_area {
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 0.5rem;
+  border: solid 1px #06d;
+  border-radius: 50%;
+  background-color: #fff;
+  -webkit-transition: -webkit-transform 0.4s;
+  
+}
+.wrap-custom-file div.file-ok {
+  background-size: cover;
+  background-position: center;
+}
+#contacts {
+  position: relative;
+}
+.add-contact-btn {
+  position: fixed;
+    bottom: 20px;
+    z-index: 1;
+    right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-tab li {
+  position: relative;
+}
+.profile-tab li.contacts::after {
+  background-color: rgb(22, 119, 245);
+  content: attr(total);
+  position: absolute;
+  padding: 3px 10px;
+    line-height: 13px;
+    color: #ffffff;
+    font-weight: 400;
+    border-radius: 4px;
+    font-size: 75%;
+    right: 0;
+    top: 2px;
+    z-index: 1;
+    outline: none;
+}
+.contact-card {
+  position: relative;
+  padding: 0;
+}
+.contact-card .edit-contact,
+.contact-card .delete-contact {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+.contact-card .delete-contact {
+  top: 50px;
+}
+
+.login-register button[type="submit"].load-active span.loader {
+  display: inline-block !important;
+}
+        </style>
+</head>
+
+<body class="fix-header fix-sidebar card-no-border" style="position: relative;">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style -->
+    <!-- ============================================================== -->
+
+        {% block main_content %}
+        {% endblock %}
+
+        {% if msg %}
+        <div style="position: fixed; bottom: 1em; right: 1em" class="alert alert-{{msg.type}} alert-dismissible fade show" role="alert">
+            <strong>{{msg.title}}!</strong> {{msg.text}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+        
+
+
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{% static 'assets/plugins/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="{% static 'assets/main/js/jquery.slimscroll.js' %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'assets/main/js/waves.js' %}"></script>
+    <!--Menu sidebar -->
+    <script src="{% static 'assets/main/js/sidebarmenu.js' %}"></script>
+    <!--stickey kit -->
+    <script src="{% static 'assets/plugins/sticky-kit-master/dist/sticky-kit.min.js' %}"></script>
+    <!--Custom JavaScript -->
+    <script src="{% static 'assets/main/js/custom.min.js' %}"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!--sparkline JavaScript -->
+    <script src="{% static 'assets/plugins/sparkline/jquery.sparkline.min.js' %}"></script>
+    
+    {% if current_page not in style_pages %}
+    <!--morris JavaScript -->
+    <script src="{% static 'assets/plugins/raphael/raphael-min.js' %}"></script>
+    <script src="{% static 'assets/plugins/morrisjs/morris.min.js' %}"></script>
+    <!-- Chart JS -->
+    <script src="{% static 'assets/main/js/dashboard1.js' %}"></script>
+    {% endif %}
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="{% static 'assets/plugins/styleswitcher/jQuery.style.switcher.js' %}"></script>
+
+    <script>
+      // medhod for ajax to login, register, verify otp
+      var loginRegisterForgot = function (form, old_btn_text, new_btn_text) {
+                form.find('button').addClass('load-active')
+                form.find('button span').eq(1).text(new_btn_text)
+
+               $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    // timeout: 800000,
+                    success: function (resp) {
+                        // $('#load_screen').removeClass('d-block');
+                        setTimeout(function(){
+                          form.find('button').removeClass('load-active')
+                          form.find('button span').eq(1).text(old_btn_text)
+                        }, 5000);
+                        
+                        //alert("SUCCESS : " + resp.url);
+                        //page = resp.page
+                        console.log(window.location.pathname)
+                        // form.find('.msg').removeClass('d-none')
+                        // form.find('.msg').addClass('text-' + resp.reg_type)
+                        // form.find('.msg').text(resp.reg_msg)
+                        
+                        if (resp.url != 'error_url') {
+                            if (resp.url != 'otp_page_pass') {
+                                window.location.pathname = resp.url
+                                console.log(resp.url)
+                            } else {
+                                $('.form-content').toggleClass('active-pass deactive-pass');
+                            }
+                        } else {}
+                        console.table("SUCCESS : ", resp);
+                    },
+                    error: function (e) {
+                        //alert(e.responseText);
+                        console.log("ERROR : ", e);
+                        //window.location.pathname = '/'
+                    },
+                });
+            }
+          
+      function set_image(ele, img_src) {
+        ele.addClass('file-ok').css('background-image', 'url(' + img_src + ')');
+        // alert(img_src)
+      }
+
+      $('input[type="file"]').each(function () {
+        // Refs
+        var file = $(this),
+          label = file.next('div.image_area'),
+          actions = label.next('.actions'),
+          previous_image = label.attr('uploaded_file');
+
+        if (previous_image) {
+          actions.find('.icon').removeClass('active').siblings('.icon.change').addClass('active');
+          // actions.find('.add').hasClass('active')
+          set_image(label, previous_image)
+        }
+
+        // When a new file is selected
+        file.on('change', function (event) {
+          // previous_image = label.attr('uploaded_file');
+          alert('check')
+
+          var fileName = file.val().split('\\').pop();
+
+          var tmppath = URL.createObjectURL(event.target.files[0]);
+
+          // //Check successfully selection
+          if (fileName) {
+            // label.addClass('file-ok').css('background-image', 'url(' + tmppath + ')');
+            set_image(label, tmppath)
+            actions.find('.icon').removeClass('active').siblings('.icon.add-commit, .icon.cancel').addClass('active');
+          } else {
+            label.removeClass('file-ok');
+          }
+
+          actions.find('.cancel').click(function () {
+            set_image(label, previous_image)
+
+            if (previous_image) {
+              actions.find('.icon.add-commit, .icon.cancel').removeClass('active').siblings('.icon.change').addClass('active');
+            } else {
+              actions.find('.icon.add-commit, .icon.cancel').removeClass('active').siblings('.icon.add').addClass('active');
+            }
+          });
+
+          actions.find('.add-commit').click(function () {
+            var is_contact_form = $(this).parents('form').hasClass('contact_form');
+            if (!is_contact_form){
+              $('.photo_upload_form').submit();
+            } else {
+              actions.find('.icon.add-commit, .icon.cancel').removeClass('active').siblings('.icon.change').addClass('active');
+            }
+          });
+          
+          
+        });
+
+        // End loop of file input elements
+
+        $('.open_contact').click(function () {
+            $("a[href='#contacts']").click();
+          });
+        
+          $('.edit-contact').click(function () {
+            var data = $(this).parent('.contact-card').data('contact');
+
+            var modal = $('#add-contact');
+
+            modal.find('form').attr('action', `/contact_update/${data.id}/`);
+
+            var modal_title = "Add New Contact";
+            var modal_button_text = "Save";
+
+            
+            var default_image = data.image.split('/').pop();
+            if (default_image == 'default.png') {
+              set_image(modal.find('div.image_area'), '/static/default.png')
+            } else {
+              set_image(modal.find('div.image_area'), data.image)
+            }
+
+            modal.find('[name="contact_fullname"]').val(data.full_name);
+            modal.find('[name="contact_email"]').val(data.email);
+            modal.find('[name="contact_pincode"]').val(data.pincode);
+            modal.find('[name="contact_mobile"]').val(data.mobile);
+            modal.find('[name="contact_address"]').val(data.address);
+            
+            modal.find('[name="category"]').find(`option[value="${data.category}"]`).attr("selected", true);
+            modal.find('[name="contact_country"]').find(`option[value="${data.country}"]`).attr("selected", true);
+
+            modal.find('.modal-title').text("Edit " + data.full_name + "'s details")
+            modal.find('button[type="submit"]').text('Update');
+
+
+            modal.find('.reset').click(function() {
+              // modal.find(".contact_form").reset();
+              modal.find('[name="category"], [name="contact_country"]').find('option').removeAttr("selected");
+              modal.find('.modal-title').text(modal_title);
+              modal.find('button[type="submit"]').text(modal_button_text);
+              modal.find('[type="reset"]').click();
+              set_image(modal.find('div.image_area'), '/static/default.png')
+            });
+            
+
+            console.table(data);
+            
+          });
+      });
+    </script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+
+</html>

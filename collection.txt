@@ -1,0 +1,4 @@
+# Register/Login
+# Profile -> Update, Deactivate
+# Dashboard -> Contact Category -> Count Box -> Contact Cards
+# Logout
