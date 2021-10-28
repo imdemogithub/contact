@@ -31,4 +31,8 @@ urlpatterns = [
     path('logout', logout, name='logout'),
     path('profile_data', profile_data, name='profile_data'),
 
+    # PAYMENT
+    path('pay/', initiate_payment, name='pay'),
+    path('callback/', callback, name='callback'),
+
 ]
